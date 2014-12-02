@@ -1,13 +1,13 @@
 students = [
-	["Dr. Hannibal Lecter", :december],
-	["Darth Vader", :december],
-    ["Nurse Ratched", :december],
-    ["Michael Corleone", :december],
-    ["Alex De Large", :december],
-    ["The Alien", :december],
-    ["Terminator", :december],
-    ["Freddy Kruger", :december],
-    ["The Joker", :december]
+	{ :name => "Dr. Hannibal Lecter", :cohort => "December" },
+	{ :name => "Darth Vader", :cohort => "December" },
+    { :name => "Nurse Ratched", :cohort => "December" },
+    { :name => "Michael Corleone", :cohort => "December" },
+    { :name => "Alex De Large", :cohort => "December" },
+    { :name => "The Alien", :cohort => "December" },
+    { :name => "Terminator", :cohort => "December" },
+    { :name => "Freddy Kruger", :cohort => "December" },
+    { :name => "The Joker", :cohort => "December" }
 	]
 
 def print_header
@@ -17,7 +17,7 @@ end
 
 def print(students)
 	students.each do |student|
-		puts "#{student[0]} (#{student[1]} cohort)"
+		puts "#{student[:name]} (#{student[:cohort]} Cohort)"
 	end
 end
 
