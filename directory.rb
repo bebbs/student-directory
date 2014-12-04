@@ -4,6 +4,7 @@ def print_menu
 	puts "==== STUDENT DIRECTORY MENU ===="
 	puts "Press 1 to input new students"
 	puts "Press 2 to show a list of students"
+	puts "Press 3 to save the student data to students.csv"
 	puts "Press 9 to exit"
 end
 
@@ -19,6 +20,8 @@ def process(selection)
 			input_students
 		when "2"
 			show_students
+		when "3"
+			save_students
 		when "9"
 			exit
 		else
@@ -73,6 +76,20 @@ def print_footer
 	else
 		puts "Overall we have #{@students.length} student!"
 	end
+end
+
+def save_students
+
+	# Open a file to write to
+	file = File.open("students.csv", "w")
+
+	# Iterate over the array of students
+	@students.each do |student|
+		student_data = [student[:name], student[:cohort]]
+		csv_line = student_data.join(",")
+		file.puts csv_line
+	end
+	file.close
 end
 
 # Call the menu to start the directory
