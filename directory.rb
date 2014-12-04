@@ -11,7 +11,11 @@ def input_students
 		cohort = gets.chomp
 		#add the student hash to the array
 		students << {:name => name, :cohort => cohort}
-		puts "Now we have #{students.length} students!"
+		if students.length > 1
+			puts "Now we have #{students.length} students!"
+		else
+			puts "Now we have #{students.length} student!"
+		end
 		name = gets.chomp
 	end
 	#return the array of students
@@ -30,7 +34,11 @@ def print(students)
 end
 
 def print_footer(names)
-	puts "Overall we have #{names.length} students!"
+	if names.length > 1
+		puts "Overall we have #{names.length} students!"
+	else
+		puts "Overall we have #{names.length} student!"
+	end
 end
 
 students = input_students
