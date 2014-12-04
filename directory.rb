@@ -1,7 +1,43 @@
+@students = []
+
+def print_menu
+	puts "==== STUDENT DIRECTORY MENU ===="
+	puts "Press 1 to input new students"
+	puts "Press 2 to show a list of students"
+	puts "Press 9 to exit"
+end
+
+def show_students
+	print_header
+	print_students_list
+	print_footer
+end
+
+def process(selection)
+	case selection
+		when "1"
+			input_students
+		when "2"
+			show_students
+		when "9"
+			exit
+		else
+			puts "Input not recognized, please try again!"
+	end
+end
+
+def interactive_menu
+	loop do
+		print_menu
+		process(gets.chomp)
+	end
+end
+
 def input_students
+	puts ""
 	puts "Please enter the names of the students."
 	puts "To finish, just hit return twice."
-	students = []
+
 	#get the first name
 	name = gets.chomp
 
@@ -10,16 +46,14 @@ def input_students
 		puts "Cohort: "
 		cohort = gets.chomp
 		#add the student hash to the array
-		students << {:name => name, :cohort => cohort}
-		if students.length > 1
-			puts "Now we have #{students.length} students!"
+		@students << {:name => name, :cohort => cohort}
+		if @students.length > 1
+			puts "Now we have #{@students.length} students!"
 		else
-			puts "Now we have #{students.length} student!"
+			puts "Now we have #{@students.length} student!"
 		end
 		name = gets.chomp
 	end
-	#return the array of students
-	students
 end
 
 def print_header
@@ -27,21 +61,19 @@ def print_header
 	puts "---------"
 end
 
-def print(students)
-	students.each do |student|
+def print_students_list
+	@students.each do |student|
 		puts "#{student[:name]} (#{student[:cohort]} Cohort)"
 	end
 end
 
-def print_footer(names)
-	if names.length > 1
-		puts "Overall we have #{names.length} students!"
+def print_footer
+	if @students.length > 1
+		puts "Overall we have #{@students.length} students!"
 	else
-		puts "Overall we have #{names.length} student!"
+		puts "Overall we have #{@students.length} student!"
 	end
 end
 
-students = input_students
-print_header
-print(students)
-print_footer(students)
+# Call the menu to start the directory
+interactive_menu
