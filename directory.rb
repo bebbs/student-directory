@@ -74,7 +74,7 @@ end
 
 def print_students_list
 	@students.each_with_index do |student, index|
-		puts "#{index}. #{student[:name]} (#{student[:cohort]} Cohort)"
+		puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} Cohort)"
 	end
 end
 
