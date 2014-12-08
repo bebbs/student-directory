@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 def print_menu
@@ -73,8 +74,8 @@ def print_header
 end
 
 def print_students_list
-	@students.each do |student|
-		puts "#{student[:name]} (#{student[:cohort]} Cohort)"
+	@students.each_with_index do |student, index|
+		puts "#{index}. #{student[:name]} (#{student[:cohort]} Cohort)"
 	end
 end
 
@@ -104,7 +105,6 @@ end
 def save_students
 	# Open a file to write too
 	file_handler("students.csv", "w")
-	# Iterate over the array of students
 	join_and_save
 end
 
