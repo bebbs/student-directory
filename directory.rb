@@ -58,12 +58,16 @@ def input_students
 		cohort = gets.chomp
 		#add the student hash to the array
 		add_to_array(name, cohort)
-		if @students.length > 1
-			puts "Now we have #{@students.length} students!"
-		else
-			puts "Now we have #{@students.length} student!"
-		end
+		student_count
 		name = gets.chomp
+	end
+end
+
+def student_count
+	if @students.length > 1
+		puts "We have #{@students.length} students!"
+	else
+		puts "We have #{@students.length} student!"
 	end
 end
 
@@ -79,11 +83,8 @@ def print_students_list
 end
 
 def print_footer
-	if @students.length > 1
-		puts "Overall we have #{@students.length} students!"
-	else
-		puts "Overall we have #{@students.length} student!"
-	end
+	student_count
+	puts "==============="
 end
 
 def file_handler(filename, mode)
