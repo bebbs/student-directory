@@ -39,6 +39,11 @@ def interactive_menu
 	end
 end
 
+def add_to_array(name, cohort)
+	@students << { :name => name, :cohort => cohort }
+end
+
+
 def input_students
 	puts ""
 	puts "Please enter the names of the students."
@@ -52,7 +57,7 @@ def input_students
 		puts "Cohort: "
 		cohort = gets.chomp
 		#add the student hash to the array
-		@students << {:name => name, :cohort => cohort}
+		add_to_array(name, cohort)
 		if @students.length > 1
 			puts "Now we have #{@students.length} students!"
 		else
@@ -81,25 +86,35 @@ def print_footer
 	end
 end
 
-def save_students
-	# Open a file to write too
-	file = File.open("students.csv", "w")
-	# Iterate over the array of students
+def file_handler(filename, mode)
+	@file = File.open(filename, mode)
+end
+
+def join_and_save
+	# Iterate through the array of students, join the name and cohort data,
+	# and save it to a new line in students.csv
 	@students.each do |student|
 		student_data = [student[:name], student[:cohort]]
 		csv_line = student_data.join(",")
-		file.puts csv_line
+		@file.puts csv_line
 	end
-	file.close
+	@file.close
+end
+
+def save_students
+	# Open a file to write too
+	file_handler("students.csv", "w")
+	# Iterate over the array of students
+	join_and_save
 end
 
 def load_students
-	file = File.open("students.csv", "r")
-	file.readlines.each do |line|
+	file_handler("students.csv", "r")
+	@file.readlines.each do |line|
 		name, cohort = line.chomp.split(",")
-		@students << { :name => name, :cohort => cohort }
+		add_to_array(name, cohort)
 	end
-	file.close
+	@file.close
 end
 
 # Call the menu to start the directory
