@@ -44,7 +44,6 @@ def add_to_array(name, cohort)
 	@students << { :name => name, :cohort => cohort }
 end
 
-
 def input_students
 	puts ""
 	puts "Please enter the names of the students."
@@ -108,13 +107,13 @@ def save_students
 	join_and_save
 end
 
+
 def load_students
-	file_handler("students.csv", "r")
-	@file.readlines.each do |line|
-		name, cohort = line.chomp.split(",")
+	CSV.foreach("students.csv", { :col_sep => ',' }) do |row|
+		name = row[0]
+		cohort = row[1]
 		add_to_array(name, cohort)
 	end
-	@file.close
 end
 
 # Call the menu to start the directory
